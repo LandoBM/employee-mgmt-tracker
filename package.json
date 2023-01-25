@@ -1,0 +1,27 @@
+{
+  "name": "12-module",
+  "description": "Employee Tracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LandoBM/employee-mgmt-tracker.git"
+  },
+  "author": "Landon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LandoBM/employee-mgmt-tracker/issues"
+  },
+  "homepage": "https://github.com/LandoBM/employee-mgmt-tracker#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "inquirer": "^9.1.4",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.0.1",
+    "sequelize": "^6.28.0"
+  }
+}
