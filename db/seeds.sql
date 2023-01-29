@@ -7,23 +7,17 @@ Select * from department;
 
 
 INSERT INTO role (title,department_id,salary )
-VALUES ("Sales Lead", 1, 100000),
-       ("Salesperson", 1, 80000),
-       ("Lead Engineer", 4, 150000),
+VALUES ("Salesperson", 1, 80000)
        ("Software Engineer", 4, 120000),
        ("Account Manager", 3, 160000),
-       ("Accountant", 3, 125000),
-       ("Legal Team Lead", 2, 250000),
        ("Lawyer", 2, 190000)
-Select * from role;  
+Select * from roles;  
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Sofia", "Carson", 1,1),
-       ("Landon","Jackson", 7, 2),
-       ("Stanley","Jones", 8,3),
-       ("Marcus", "Campbell",6,4),
-       ("Mikel", "Watson", 5,3),
-       ("Justin", "Baker", 4,2),
-       ("Azaria", "McAfee", 3,1),
-       ("Zion", "Malik", 2,3)
+VALUES ("Sofia", "Carson", 1,NULL),
+       ("Landon","Jackson", 2, NULL),
+       ("Marcus", "Campbell",3,NULL),
+       ("Justin", "Baker", 3,NULL),
+       ("Zion", "Malik", 4,NULL);
 Select * from employee;  
+
