@@ -14,10 +14,10 @@ VALUES ("Salesperson", 1, 80000),
 -- Select * from roles;  
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Sofia", "Carson", 1,2),
-       ("Landon","Jackson", 2, 2),
-       ("Marcus", "Campbell",3,2),
-       ("Justin", "Baker", 3,2),
-       ("Zion", "Malik", 4,2);
+VALUES ("Sofia", "Carson", 1,NULL),
+       ("Landon","Jackson", 2, NULL),
+       ("Marcus", "Campbell",3, NULL),
+       ("Justin", "Baker", 3,NULL),
+       ("Zion", "Malik", 4,NULL);
 -- Select * from employee;  
 

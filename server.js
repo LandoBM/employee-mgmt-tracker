@@ -130,7 +130,7 @@ const addRole = () =>{
     }
   ]).then((data) => {
     const sql = 'insert into role (title, salary, department_id) Values (?,?,?);'
-    const parameter = [data.title, data.salary, data.department_id]
+    const parameter = [data.title, data.salary, data.department]
     db.query(sql, parameter, (err, data) => {
       if (err) {
         console.log(err)
@@ -148,12 +148,12 @@ const addDepartment = () =>{
   inquirer.prompt([
     {
       type: 'input',
-      name: 'name department',
+      name: 'department',
       message: 'What is the name of the NEW department?'
     }
   ]).then((data) => {
     const sql = `INSERT INTO department (name) VALUES (?)`;
-    const parameter = [data.name]
+    const parameter = [data.department]
     db.query(sql,parameter, (err, data) => {
       if (err) {
         console.log(err)
@@ -171,27 +171,27 @@ const addEmployee = () =>{
   inquirer.prompt([
     {
       type: 'input',
-      name: 'first name',
+      name: 'first_name',
       message: 'What is the employee First Name?'
     },
     {
       type: 'input',
-      name: 'last name',
+      name: 'last_name',
       message: 'What is the employee Last Name?'
     },
     {
       type: 'input',
-      name: 'role',
+      name: 'role_id',
       message: 'What is the employee"s role?'
     },
-    {
-      type: 'input',
-      name: 'manager',
-      message: 'Who is the employee"s manager?'
-    }
+    // {
+    //   type: 'input',
+    //   name: 'manager_id',
+    //   message: 'Who is the employee"s manager?'
+    // }
   ]).then((data) => {
-    const sql = 'insert into employee (first_name, last_name, role_id, manager_id) Values (?,?,?,?);'
-    const parameter = [data.first_name, data.last_name, data.role_id, data.manager_id]
+    const sql = 'insert into employee (first_name, last_name, role_id, manager_id) Values (?,?,?,NULL);'
+    const parameter = [data.first_name, data.last_name, data.role_id]
     db.query(sql, parameter, (err, data) => {
       if (err) {
         console.log(err)
@@ -205,26 +205,32 @@ const addEmployee = () =>{
 }
 
 const updateEmployeeRole = () =>{
-  let employee = ''
-  let role = ''
-  const sql = 'update employee set role_id = ? where id = ?;' 
+  // let employee = showEmployee
+  // let role = showRoles
+  // const sql = 'update employee set role_id = ? where id = ?;' 
   const employeeUpdate = inquirer.prompt([
     {
-      type: "list",
-      name:'employee',
+      type: "input",
+      name:'employee_id',
       message: "Which employee are you updating?",
-      choice: employee
+      // choices: ['']
     },
     {
-      type: "list",
-      name: "role",
+      type: "input",
+      name: "role_id",
       message: "what is the new role of the employee?",
-      choices: role 
+      // choices: ['view all roles'] 
     }
   ]).then((data) => {
-    db.query(`update employee set role_id = ${data.role} where id = ${data.employee};`, (err)=>{
+    const sql = 'update employee set role_id = ? where id = ?;' 
+    const parameter = [data.employee_id, data.role_id]
+    db.query(sql, parameter, (err, data)=>{
       if (err) {
         console.log(err)
+      } else {
+        console.log('\n')
+        console.log(cTable.getTable(data))
+        showEmployee()
         questions()
       }
     })
