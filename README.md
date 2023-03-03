@@ -48,10 +48,10 @@
     THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
     ```
     ## Installation
-     ```
+     
      To start the app in your terminal, npm run seed, then npm start.
      If npm run seed does not work use `mysql -u root -p` and source the related path for the `schema` and the related path for the `seeds.js`. 
-     ```
+     
     ## Usage
     In this application you can view employees, view departments, view roles, add a department, add a role, add an employee, and update an employee role. 
     ## Mock-Up
