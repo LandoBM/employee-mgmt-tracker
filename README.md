@@ -8,7 +8,6 @@
   * [Contributors](#contributors)
   * [Walkthrough](#walkthrough)
   * [Questions](#questions)
-  * 
 
 
   
@@ -59,13 +58,13 @@
 
     The following video shows an example of the application being used from the command line:
 
-    [![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/employee-tracker-gif.gif)]
+    [![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/employee-tracker-gif.gif)
     ## Contributors
     Landon M.
     ## License
     MIT License
     ## Walkthrough
-     Link to [Video]()
+     Link to [Video](https://drive.google.com/file/d/1IyV_rsr1ZOHuLxnveZ8mcVpVTKZlS92E/view)
 
     ## Questions
   * Github : [LandoBM](https://github.com/LandoBM/)
