@@ -1,19 +1,28 @@
-require('dotenv').config()
-// const inquirer = require('inquirer')
-const cTable = require("console.table");
-const express = require("express");
-// const mysql = require('./db/queries.sql')
+const express = require("express")
+const cTable = require("console.table")
+const mysql = require('mysql2')
+const inquirer = require('inquirer')
 
-
-const PORT = process.env.PORT || 3001;
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+const db = mysql.createConnection(
+  {
+      host: 'localhost',
+      user: 'root',
+      password: '@codewithlandon',
+      database: 'company_db'
+  },
+  console.log('Connected to Employee Management Company Database')
+)
+
 const questions = () => {
-  inquirer.prompt({
+  inquirer
+  .prompt({
     type: "list",
     message: "What would you like to do?",
     name: "catalog",
@@ -61,5 +70,177 @@ const questions = () => {
     }
   })
 };
+
+
+function showDepartment() {
+  const sql = 'select id, name from department;'
+  db.query(sql,(err, data) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('\n')
+      console.log(cTable.getTable(data))
+      questions()
+    }
+  })
+}
+
+function showRoles() {
+  const sql = 'select role.id, role.title,role.salary, department.name AS Department from role INNER JOIN department ON role.department_id = department.id;'
+  db.query(sql,(err, data) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('\n')
+      console.log(cTable.getTable(data))
+      questions()
+    }
+  })
+}
+
+function showEmployee() {
+  const sql = 'select employee.first_name, employee.last_name, department.name AS department, role.salary AS salary, role.title from employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id;'
+  db.query(sql,(err, data) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('\n')
+      console.log(cTable.getTable(data))
+      questions()
+    }
+  })
+}
+
+const addRole = () =>{
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'title',
+      message: 'What is the name of the NEW role?'
+    },
+    {
+      type: 'input',
+      name: 'salary',
+      message: 'What is the salary amount (USD) for the NEW role?'
+    },
+    {
+      type: 'input',
+      name: 'department',
+      message: 'What department does the NEW role fall under?'
+    }
+  ]).then((data) => {
+    const sql = 'insert into role (title, salary, department_id) Values (?,?,?);'
+    const parameter = [data.title, data.salary, data.department_id]
+    db.query(sql, parameter, (err, data) => {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('\n')
+        console.log(cTable.getTable(data))
+        questions()
+      }
+    })
+  })
+}
+
+
+const addDepartment = () =>{
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name department',
+      message: 'What is the name of the NEW department?'
+    }
+  ]).then((data) => {
+    const sql = `INSERT INTO department (name) VALUES (?)`;
+    const parameter = [data.name]
+    db.query(sql,parameter, (err, data) => {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('\n')
+        console.log(cTable.getTable(data))
+        showDepartment()
+        questions()
+      }
+    })
+  })
+}
+
+const addEmployee = () =>{
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'first name',
+      message: 'What is the employee First Name?'
+    },
+    {
+      type: 'input',
+      name: 'last name',
+      message: 'What is the employee Last Name?'
+    },
+    {
+      type: 'input',
+      name: 'role',
+      message: 'What is the employee"s role?'
+    },
+    {
+      type: 'input',
+      name: 'manager',
+      message: 'Who is the employee"s manager?'
+    }
+  ]).then((data) => {
+    const sql = 'insert into employee (first_name, last_name, role_id, manager_id) Values (?,?,?,?);'
+    const parameter = [data.first_name, data.last_name, data.role_id, data.manager_id]
+    db.query(sql, parameter, (err, data) => {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('\n')
+        console.log(cTable.getTable(data))
+        questions()
+      }
+    })
+  })
+}
+
+const updateEmployeeRole = () =>{
+  let employee = ''
+  let role = ''
+  const sql = 'update employee set role_id = ? where id = ?;' 
+  const employeeUpdate = inquirer.prompt([
+    {
+      type: "list",
+      name:'employee',
+      message: "Which employee are you updating?",
+      choice: employee
+    },
+    {
+      type: "list",
+      name: "role",
+      message: "what is the new role of the employee?",
+      choices: role 
+    }
+  ]).then((data) => {
+    db.query(`update employee set role_id = ${data.role} where id = ${data.employee};`, (err)=>{
+      if (err) {
+        console.log(err)
+        questions()
+      }
+    })
+  })
+}
+
+questions()
+
+
+// Default response for any other request (Not Found)
+// app.use((req, res) => {
+//   res.status(404).end();
+// });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 

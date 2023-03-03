@@ -8,18 +8,22 @@ CREATE DATABASE company_db;
 -- Uses the company_db database --
 USE company_db;
 
+DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS employee;
+
 CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     -- name - to hold the department name
     name VARCHAR(30) NOT NULL 
-)
+);
 
 CREATE TABLE role (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     -- Title for roles in the different departments
     title VARCHAR(30) NOT NULL,
     -- salaries of the different roles
-    salary DECIMAL(10,3) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL,
     -- 
     department_id INTEGER NOT NULL,
     CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
@@ -39,8 +43,3 @@ CREATE TABLE employee (
      CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 );
 
-CREATE TABLE manager (
-    id INT NOT NULL PRIMARY KEY,
-    full_name VARCHAR(30),
-    CONSTRAINT fk_employee FOREIGN KEY (employee) REFERENCES employee(id) ON DELETE SET NULL
-)
