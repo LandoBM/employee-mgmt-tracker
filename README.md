@@ -6,8 +6,9 @@
   * [Installation](#installation)
   * [Usage](#usage)
   * [Contributors](#contributors)
-  * [Test](#test)
+  * [Walkthrough](#walkthrough)
   * [Questions](#questions)
+  * 
 
 
   
@@ -15,6 +16,9 @@
 
 
     ## Description
+
+    In this application, using inquirer npm package the client is able to manage employees, departments, and roles of a business as well as add an employee, add a role, add a department, or update an employee'e role. 
+
     ## User Story
 
     ```md
@@ -55,13 +59,13 @@
 
     The following video shows an example of the application being used from the command line:
 
-    [![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/12-sql-homework-video-thumbnail.png)](https://2u-20.wistia.com/medias/2lnle7xnpk)
+    [![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/employee-tracker-gif.gif)]
     ## Contributors
     Landon M.
     ## License
     MIT License
-    <!-- ## Test
-    undefined -->
+    ## Walkthrough
+     Link to [Video]()
 
     ## Questions
   * Github : [LandoBM](https://github.com/LandoBM/)
