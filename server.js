@@ -223,7 +223,7 @@ const updateEmployeeRole = () =>{
     }
   ]).then((data) => {
     const sql = 'update employee set role_id = ? where id = ?;' 
-    const parameter = [data.employee_id, data.role_id]
+    const parameter = [data.role_id, data.employee_id]
     db.query(sql, parameter, (err, data)=>{
       if (err) {
         console.log(err)

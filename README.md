@@ -46,9 +46,11 @@
     ```
     ## Installation
      ```
-    node index.js 
+     To start the app in your terminal, npm run seed, then npm start.
+     If npm run seed does not work use `mysql -u root -p` and source the related path for the `schema` and the related path for the `seeds.js`. 
      ```
     ## Usage
+    In this application you can view employees, view departments, view roles, add a department, add a role, add an employee, and update an employee role. 
     ## Mock-Up
 
     The following video shows an example of the application being used from the command line:
